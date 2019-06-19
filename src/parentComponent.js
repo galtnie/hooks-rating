@@ -1,18 +1,25 @@
 import React, { useState } from "react";
+import Child from "./childComponent";
 
 const Parent = () => {
   const [mark, setMark] = useState("");
+  const [input, setInput] = useState("");
   const [child, setChild] = useState(false);
 
   const handleMark = () => {
-    if (mark === "") {
+    if (input === "") {
       alert("Input something first");
-    } else if (mark > 100 || mark < 0) {
+    } else if (input > 100 || input < 0) {
       alert("Stick to the numerical limitation");
       setMark("");
     } else {
+      setMark(input);
       setChild(true);
     }
+  };
+
+  const changeMark = percent => {
+    setInput(percent);
   };
 
   return (
@@ -29,12 +36,15 @@ const Parent = () => {
           type="number"
           min="0"
           max="100"
-          value={mark}
-          onChange={e => setMark(e.target.value)}
+          value={input}
+          onChange={e => setInput(e.target.value)}
         />
-        <button onClick={handleMark}>Mark</button>
+        %
+        <button style={{ marginLeft: "1em" }} onClick={handleMark}>
+          Mark
+        </button>
       </div>
-      {child ? `child ${mark}` : null}
+      {child ? <Child mark={mark} changeMark={changeMark} /> : null}
     </div>
   );
 };
