@@ -48,11 +48,8 @@ const Star = props => {
     }
   };
 
-  const onCursorClick = e => {
-    console.log("works");
-    console.log(e.clientX);
-    console.log(e.getBoundingClientRect());
-    console.log(value);
+  const onCursorClick = () => {
+    props.changeRatingOnClick(value);
   };
 
   return (

@@ -30,6 +30,7 @@ const Child = props => {
           rating={rating}
           renderStarsOnHover={renderStarsOnHover}
           renderStarsOnHoverEnd={renderStarsOnHoverEnd}
+          changeRatingOnClick={changeRatingOnClick}
         />
       );
     }
@@ -44,19 +45,22 @@ const Child = props => {
     setValue(rating);
   };
 
+  const changeRatingOnClick = value => {
+    setRating(value);
+    props.changePercentByClickingStars(value);
+  };
+
   return (
-    <div style={{ textAlign: "start", marginTop: "1em" }}>
-      <span>{rating}</span>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-star",
-          marginTop: "1em"
-        }}
-      >
-        {renderStars()}
-      </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "flex-star",
+        marginTop: "1em",
+        textAlign: "start"
+      }}
+    >
+      {renderStars()}
     </div>
   );
 };

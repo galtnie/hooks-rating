@@ -16,8 +16,8 @@ const Parent = () => {
     }
   };
 
-  const changePercent = rate => {
-    setInput(rate);
+  const changePercentByClickingStars = rate => {
+    setInput(rate * 10);
   };
 
   return (
@@ -42,7 +42,10 @@ const Parent = () => {
           Mark
         </button>
       </div>
-      <Child percent={percent} changePercent={changePercent} />
+      <Child
+        percent={percent}
+        changePercentByClickingStars={changePercentByClickingStars}
+      />
     </div>
   );
 };
