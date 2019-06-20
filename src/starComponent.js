@@ -19,57 +19,49 @@ const Star = props => {
   const onCursorMove = e => {
     const cursorCoords = e.clientX - starX;
     if (width / 2 <= cursorCoords) {
-      setValue(12);
+      setValue(props.id);
+      props.renderStarsOnHover(props.id);
     } else if (width / 2 > cursorCoords) {
-      setValue(11);
+      setValue(props.id - 1); // dig deeper whether it can be dispensed
+      props.renderStarsOnHover(props.id - 1);
     }
   };
 
   const onCursorLeave = e => {
     setValue(props.value);
+    props.renderStarsOnHoverEnd();
   };
 
   const renderStar = () => {
     if (value === 0) {
-      return (
-        <i
-          className="fa fa-star-o fa-5x"
-          ref={starEl}
-          onMouseMove={onCursorMove}
-          onMouseLeave={onCursorLeave}
-        />
-      );
+      return <i className="fa fa-star-o fa-5x" ref={starEl} />;
     } else if (value % 2 === 1) {
       return (
         <i
           className="fa fa-star-half-o fa-5x"
           aria-hidden="true"
           ref={starEl}
-          onMouseMove={onCursorMove}
-          onMouseLeave={onCursorLeave}
         />
       );
     } else if (value % 2 === 0) {
-      return (
-        <i
-          className="fa fa-star fa-5x"
-          aria-hidden="true"
-          ref={starEl}
-          onMouseMove={onCursorMove}
-          onMouseLeave={onCursorLeave}
-        />
-      );
+      return <i className="fa fa-star fa-5x" aria-hidden="true" ref={starEl} />;
     }
   };
 
-  const alterRating = e => {
+  const onCursorClick = e => {
     console.log("works");
     console.log(e.clientX);
     console.log(e.getBoundingClientRect());
+    console.log(value);
   };
 
   return (
-    <div style={{ marginRight: "0.2em" }} onClick={alterRating}>
+    <div
+      style={{ marginRight: "0.2em" }}
+      onMouseMove={onCursorMove}
+      onMouseLeave={onCursorLeave}
+      onClick={onCursorClick}
+    >
       {renderStar()}
     </div>
   );

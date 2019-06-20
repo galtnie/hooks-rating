@@ -3,28 +3,45 @@ import Star from "./starComponent";
 
 const Child = props => {
   const [rating, setRating] = useState(null);
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     let mark = Math.round(props.percent / 10);
     setRating(mark);
+    setValue(mark);
   }, [props.percent]);
 
   const renderStars = () => {
     const stars = [];
-
-    let value;
+    let starValue;
     for (let i = 2; i <= 10; i += 2) {
-      if (rating < i - 1) {
-        value = 0;
-      } else if (rating === i - 1 || rating === i) {
-        value = rating;
-      } else if (rating > i) {
-        value = i;
+      if (value < i - 1) {
+        starValue = 0;
+      } else if (value === i - 1 || value === i) {
+        starValue = rating;
+      } else if (value > i) {
+        starValue = i;
       }
-
-      stars.push(<Star key={i} id={i} value={value} rating={rating} />);
+      stars.push(
+        <Star
+          key={i}
+          id={i}
+          value={starValue}
+          rating={rating}
+          renderStarsOnHover={renderStarsOnHover}
+          renderStarsOnHoverEnd={renderStarsOnHoverEnd}
+        />
+      );
     }
     return stars;
+  };
+
+  const renderStarsOnHover = value => {
+    setValue(value);
+  };
+
+  const renderStarsOnHoverEnd = () => {
+    setValue(rating);
   };
 
   return (
