@@ -17,15 +17,13 @@ const Star = props => {
 
   useEffect(() => {
     setValue(props.value);
-  }, [props.value]);
+  }, [props.id, props.value]);
 
   const onCursorMove = e => {
     const cursorCoords = e.clientX - starX;
     if (width / 2 <= cursorCoords) {
-      setValue(props.id);
       props.renderStarsOnHover(props.id);
     } else if (width / 2 > cursorCoords) {
-      setValue(props.id - 1);
       props.renderStarsOnHover(props.id - 1);
     }
   };
@@ -37,23 +35,23 @@ const Star = props => {
 
   const renderStar = () => {
     let iconClass;
-    if (value === 0 && props.icon === "star") {
+    if (value <= props.id - 2 && props.icon === "star") {
       iconClass = "star-o";
-    } else if (value === 0 && props.icon === "battery") {
+    } else if (value <= props.id - 2 && props.icon === "battery") {
       iconClass = "battery-empty";
-    } else if (value === 0 && props.icon === "thermometer") {
+    } else if (value <= props.id - 2 && props.icon === "thermometer") {
       iconClass = "thermometer-empty";
-    } else if (value % 2 === 1 && props.icon === "star") {
+    } else if (value === props.id - 1 && props.icon === "star") {
       iconClass = "star-half-o";
-    } else if (value % 2 === 1 && props.icon === "battery") {
+    } else if (value === props.id - 1 && props.icon === "battery") {
       iconClass = "battery-half";
-    } else if (value % 2 === 1 && props.icon === "thermometer") {
+    } else if (value === props.id - 1 && props.icon === "thermometer") {
       iconClass = "thermometer-half";
-    } else if (value % 2 === 0 && props.icon === "star") {
+    } else if (value >= props.id && props.icon === "star") {
       iconClass = "star";
-    } else if (value % 2 === 0 && props.icon === "battery") {
+    } else if (value >= props.id && props.icon === "battery") {
       iconClass = "battery-full";
-    } else if (value % 2 === 0 && props.icon === "thermometer") {
+    } else if (value >= props.id && props.icon === "thermometer") {
       iconClass = "thermometer-full";
     }
 

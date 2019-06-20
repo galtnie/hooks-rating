@@ -16,20 +16,13 @@ const Child = props => {
 
   const renderStars = () => {
     const stars = [];
-    let starValue;
+
     for (let i = 2; i <= 10; i += 2) {
-      if (value < i - 1) {
-        starValue = 0;
-      } else if (value === i - 1 || value === i) {
-        starValue = rating;
-      } else if (value > i) {
-        starValue = i;
-      }
       stars.push(
         <Star
           key={i}
           id={i}
-          value={starValue}
+          value={value}
           renderStarsOnHover={renderStarsOnHover}
           renderStarsOnHoverEnd={renderStarsOnHoverEnd}
           changeRatingOnClick={changeRatingOnClick}
@@ -56,7 +49,6 @@ const Child = props => {
   };
 
   const changeIcon = value => {
-    console.log(value);
     setIcon(value);
   };
 
