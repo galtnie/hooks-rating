@@ -5,12 +5,15 @@ const Star = props => {
   const [starX, setStarX] = useState(null);
   const [width, setWidth] = useState(null);
 
-  const starEl = useCallback(node => {
-    if (node !== null) {
-      setStarX(node.getBoundingClientRect().x);
-      setWidth(node.getBoundingClientRect().width);
-    }
-  }, []);
+  const starEl = useCallback(
+    node => {
+      if (node !== null) {
+        setStarX(node.getBoundingClientRect().x);
+        setWidth(node.getBoundingClientRect().width);
+      }
+    },
+    [props.icon]
+  );
 
   useEffect(() => {
     setValue(props.value);
@@ -22,7 +25,7 @@ const Star = props => {
       setValue(props.id);
       props.renderStarsOnHover(props.id);
     } else if (width / 2 > cursorCoords) {
-      setValue(props.id - 1); // dig deeper whether it can be dispensed
+      setValue(props.id - 1);
       props.renderStarsOnHover(props.id - 1);
     }
   };
@@ -34,17 +37,82 @@ const Star = props => {
 
   const renderStar = () => {
     if (value === 0) {
-      return <i className="fa fa-star-o fa-5x" ref={starEl} />;
+      switch (props.icon) {
+        case "star":
+          return <i className="fa fa-star-o fa-5x" ref={starEl} />;
+        case "battery":
+          return (
+            <i
+              className="fa fa-battery-empty fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        case "thermometer":
+          return (
+            <i
+              className="fa fa-thermometer-empty fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        default:
+          return null;
+      }
     } else if (value % 2 === 1) {
-      return (
-        <i
-          className="fa fa-star-half-o fa-5x"
-          aria-hidden="true"
-          ref={starEl}
-        />
-      );
+      switch (props.icon) {
+        case "star":
+          return (
+            <i
+              className="fa fa-star-half-o fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        case "battery":
+          return (
+            <i
+              className="fa fa-battery-half fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        case "thermometer":
+          return (
+            <i
+              className="fa fa-thermometer-half fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        default:
+          return null;
+      }
     } else if (value % 2 === 0) {
-      return <i className="fa fa-star fa-5x" aria-hidden="true" ref={starEl} />;
+      switch (props.icon) {
+        case "star":
+          return (
+            <i className="fa fa-star fa-5x" aria-hidden="true" ref={starEl} />
+          );
+        case "battery":
+          return (
+            <i
+              className="fa fa-battery-full fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        case "thermometer":
+          return (
+            <i
+              className="fa fa-thermometer-full fa-5x"
+              aria-hidden="true"
+              ref={starEl}
+            />
+          );
+        default:
+          return null;
+      }
     }
   };
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Star from "./starComponent";
+import ChoiceOfIcons from "./choiceOfIcons";
 
 const Child = props => {
   const [rating, setRating] = useState(null);
   const [value, setValue] = useState(null);
+  const [hover, setHover] = useState(false);
+  const [icon, setIcon] = useState("star");
 
   useEffect(() => {
     let mark = Math.round(props.percent / 10);
@@ -31,6 +34,7 @@ const Child = props => {
           renderStarsOnHover={renderStarsOnHover}
           renderStarsOnHoverEnd={renderStarsOnHoverEnd}
           changeRatingOnClick={changeRatingOnClick}
+          icon={icon}
         />
       );
     }
@@ -39,10 +43,12 @@ const Child = props => {
 
   const renderStarsOnHover = value => {
     setValue(value);
+    setHover(true);
   };
 
   const renderStarsOnHoverEnd = () => {
     setValue(rating);
+    setHover(false);
   };
 
   const changeRatingOnClick = value => {
@@ -50,17 +56,25 @@ const Child = props => {
     props.changePercentByClickingStars(value);
   };
 
+  const changeIcon = value => {
+    console.log(value);
+    setIcon(value);
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-star",
-        marginTop: "1em",
-        textAlign: "start"
-      }}
-    >
-      {renderStars()}
+    <div style={{ marginTop: "1em", textAlign: "start" }}>
+      <ChoiceOfIcons icon={icon} changeIcon={changeIcon} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-star"
+        }}
+      >
+        {renderStars()}
+      </div>
+
+      {hover ? <span>{`Rating on hover ${value * 10}%`}</span> : null}
     </div>
   );
 };
