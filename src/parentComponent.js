@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import Child from "./childComponent";
 
 const Parent = () => {
-  const [mark, setMark] = useState("");
-  const [input, setInput] = useState("");
-  const [child, setChild] = useState(false);
+  const [mark, setMark] = useState(0);
+  const [input, setInput] = useState(0);
 
   const handleMark = () => {
     if (input === "") {
       alert("Input something first");
     } else if (input > 100 || input < 0) {
       alert("Stick to the numerical limitation");
-      setMark("");
+      setMark(0);
     } else {
       setMark(input);
-      setChild(true);
     }
   };
 
@@ -44,7 +42,7 @@ const Parent = () => {
           Mark
         </button>
       </div>
-      {child ? <Child mark={mark} changeMark={changeMark} /> : null}
+      <Child mark={mark} changeMark={changeMark} />
     </div>
   );
 };
