@@ -30,7 +30,6 @@ const Child = props => {
           key={i}
           id={i}
           value={starValue}
-          rating={rating}
           renderStarsOnHover={renderStarsOnHover}
           renderStarsOnHoverEnd={renderStarsOnHoverEnd}
           changeRatingOnClick={changeRatingOnClick}

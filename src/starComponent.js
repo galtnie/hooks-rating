@@ -72,7 +72,6 @@ const Star = props => {
 
   return (
     <div
-      style={{ marginRight: "0.2em" }}
       onMouseMove={onCursorMove}
       onMouseLeave={onCursorLeave}
       onClick={onCursorClick}
