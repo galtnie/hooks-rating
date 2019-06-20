@@ -11,8 +11,18 @@ const Child = props => {
 
   const renderStars = () => {
     const stars = [];
-    for (let i = 0; i < 5; i++) {
-      stars.push(<Star key={i + 1} />);
+
+    let id;
+    for (let i = 2; i <= 10; i += 2) {
+      if (rating < i - 1) {
+        id = 0;
+      } else if (rating === i - 1 || rating === i) {
+        id = rating;
+      } else if (rating > i) {
+        id = i;
+      }
+
+      stars.push(<Star key={i} id={id} />);
     }
     return stars;
   };

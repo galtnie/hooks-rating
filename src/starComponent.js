@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-const Star = () => {
+const Star = props => {
   const [rate, setRate] = useState(0);
 
+  useEffect(() => {
+    console.log(props.id);
+  }, [props.id]);
+
   const renderStar = () => {
-    switch (rate) {
-      case 0:
-        return "empty";
-      case 1:
-        return "half";
-      case 3:
-        return "full";
-      default:
-        return null;
+    if (props.id === 0) {
+      return "empty";
+    } else if (props.id % 2 === 1) {
+      return "half";
+    } else if (props.id % 2 === 0) {
+      return "full";
     }
   };
 
