@@ -5,8 +5,9 @@ const Child = props => {
   const [rating, setRating] = useState(null);
 
   useEffect(() => {
-    setRating(props.mark);
-  }, [props.mark]);
+    let mark = Math.round(props.percent / 10);
+    setRating(mark);
+  }, [props.percent]);
 
   const renderStars = () => {
     const stars = [];
@@ -17,15 +18,18 @@ const Child = props => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-star",
-        marginTop: "1em"
-      }}
-    >
-      {renderStars()}
+    <div style={{ textAlign: "start", marginTop: "1em" }}>
+      <span>{rating}</span>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-star",
+          marginTop: "1em"
+        }}
+      >
+        {renderStars()}
+      </div>
     </div>
   );
 };
