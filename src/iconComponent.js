@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const Icon = ({
-  value,
-  icon,
-  id,
-  renderStarsOnHoverEnd,
-  renderStarsOnHover,
-  changeRatingOnClick
-}) => {
+const Icon = ({ value, icon, id, renderStarsOnHover, changeRatingOnClick }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const [iconX, setIconX] = useState(null);
   const [width, setWidth] = useState(null);
@@ -20,12 +13,14 @@ const Icon = ({
         setWidth(symbol.getBoundingClientRect().width);
       }
     },
-    [icon]
+    [icon, rerender]
   );
 
   useEffect(() => {
     if (rerender === false) {
-      setRerender(true);
+      setTimeout(() => {
+        setRerender(true);
+      }, 1000);
     }
   }, [rerender]);
 
@@ -41,11 +36,6 @@ const Icon = ({
       renderStarsOnHover(id - 1);
     }
   };
-
-  // const onCursorLeave = e => {
-  //   setCurrentValue(value);
-  //   // renderStarsOnHoverEnd();
-  // };
 
   const renderStar = () => {
     let iconClass;
@@ -78,7 +68,6 @@ const Icon = ({
         aria-hidden="true"
         ref={starEl}
         onMouseMove={onCursorMove}
-        // onMouseLeave={onCursorLeave}
         onClick={onCursorClick}
       />
     );
