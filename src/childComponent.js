@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Star from "./starComponent";
+import Icon from "./iconComponent";
 import ChoiceOfIcons from "./choiceOfIcons";
 
 const Child = props => {
@@ -19,7 +19,7 @@ const Child = props => {
 
     for (let i = 2; i <= 10; i += 2) {
       stars.push(
-        <Star
+        <Icon
           key={i}
           id={i}
           value={value}
