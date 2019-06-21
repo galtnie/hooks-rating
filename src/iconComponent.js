@@ -11,27 +11,16 @@ const Icon = ({
   const [currentValue, setCurrentValue] = useState(0);
   const [iconX, setIconX] = useState(null);
   const [width, setWidth] = useState(null);
-  // const [isRerendered, setIsRerendered] = useState(false);
 
   const starEl = useCallback(
     symbol => {
       if (symbol !== null) {
-        // setIconX(symbol.getBoundingClientRect().x);
-        // setWidth(symbol.getBoundingClientRect().width);
-        setTimeout(() => {
-          setIconX(symbol.getBoundingClientRect().x);
-          setWidth(symbol.getBoundingClientRect().width);
-        }, 500);
+        setIconX(symbol.getBoundingClientRect().x);
+        setWidth(symbol.getBoundingClientRect().width);
       }
     },
-    [icon] // isRerendered
+    [icon]
   );
-
-  // useEffect(() => {
-  //   if (!isRerendered) {
-  //     setIsRerendered(true);
-  //   }
-  // }, [isRerendered]);
 
   useEffect(() => {
     setCurrentValue(value);
