@@ -55,7 +55,7 @@ const Child = props => {
   return (
     <div style={{ marginTop: "1em", textAlign: "start" }}>
       <ChoiceOfIcons icon={icon} changeIcon={changeIcon} />
-      <div> {renderStars()}</div>
+      <div onMouseLeave={renderStarsOnHoverEnd}> {renderStars()}</div>
 
       {hover ? <span>{`Rating on hover ${value * 10}%`}</span> : null}
     </div>

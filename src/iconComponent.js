@@ -42,10 +42,10 @@ const Icon = ({
     }
   };
 
-  const onCursorLeave = e => {
-    setCurrentValue(value);
-    renderStarsOnHoverEnd();
-  };
+  // const onCursorLeave = e => {
+  //   setCurrentValue(value);
+  //   // renderStarsOnHoverEnd();
+  // };
 
   const renderStar = () => {
     let iconClass;
@@ -78,7 +78,7 @@ const Icon = ({
         aria-hidden="true"
         ref={starEl}
         onMouseMove={onCursorMove}
-        onMouseLeave={onCursorLeave}
+        // onMouseLeave={onCursorLeave}
         onClick={onCursorClick}
       />
     );
