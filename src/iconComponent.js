@@ -11,6 +11,7 @@ const Icon = ({
   const [currentValue, setCurrentValue] = useState(0);
   const [iconX, setIconX] = useState(null);
   const [width, setWidth] = useState(null);
+  const [rerender, setRerender] = useState(false);
 
   const starEl = useCallback(
     symbol => {
@@ -21,6 +22,12 @@ const Icon = ({
     },
     [icon]
   );
+
+  useEffect(() => {
+    if (rerender === false) {
+      setRerender(true);
+    }
+  }, [rerender]);
 
   useEffect(() => {
     setCurrentValue(value);
